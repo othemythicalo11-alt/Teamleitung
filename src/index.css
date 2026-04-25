@@ -10,9 +10,9 @@
   body {
     @apply min-h-screen bg-deep-950 font-body text-neon-ice antialiased;
     background-image:
-      radial-gradient(circle at top left, rgba(255, 122, 24, 0.18), transparent 30%),
-      radial-gradient(circle at top right, rgba(103, 240, 192, 0.12), transparent 24%),
-      linear-gradient(145deg, #07111c 0%, #0b1727 48%, #11243a 100%);
+      radial-gradient(circle at top left, rgba(143, 92, 255, 0.2), transparent 30%),
+      radial-gradient(circle at top right, rgba(167, 139, 250, 0.16), transparent 24%),
+      linear-gradient(145deg, #120816 0%, #1a0d24 48%, #27153a 100%);
   }
 
   body::before {

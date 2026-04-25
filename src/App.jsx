@@ -2,7 +2,8 @@ import {
   divisions,
   operationCards,
   reasons,
-  recruitmentPoints,
+  reviewAreas,
+  noteTemplates,
   spotlightIdeas,
   standards,
   stats,
@@ -54,7 +55,7 @@ function App() {
                 Standards
               </a>
               <a className="nav-link" href="#join">
-                Recruiting
+                Bewertungen
               </a>
             </div>
           </nav>
@@ -63,12 +64,12 @@ function App() {
             <div>
               <p className="eyebrow">Leitung, Struktur und Vertrauen</p>
               <h2 className="max-w-4xl font-display text-5xl uppercase leading-[0.9] tracking-[0.04em] text-white md:text-7xl">
-                Die Schaltzentrale fuer dein Server-Team.
+                Interne Teamverwaltung nur fuer die Leitung.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-8 text-neon-steel md:text-lg">
-                DeepState Teamverwaltung verbindet Teamvorstellung, Aufgabenverteilung, Standards und Recruiting auf
-                einer Seite. So kannst du Mitglieder, Rollen und wichtige Infos sauber praesentieren und spaeter leicht
-                anpassen.
+                DeepState Teamverwaltung ist als internes Leitungsboard gedacht. Ihr koennt hier Infos zu Teamlern,
+                positive Entwicklungen, negative Auffaelligkeiten und wichtige Leitungsnotizen sauber sammeln und spaeter
+                leicht anpassen.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -76,7 +77,7 @@ function App() {
                   Team ansehen
                 </a>
                 <a className="secondary-button" href="#join">
-                  Bewerberbereich
+                  Bewertungen
                 </a>
               </div>
             </div>
@@ -130,8 +131,8 @@ function App() {
         <section className="section-shell" id="team">
           <SectionHeading
             eyebrow="Staff-Team"
-            title="Mitglieder und Verantwortungen"
-            note="Die Teamkarten werden aus einer zentralen Datenliste geladen. Damit kannst du spaeter Namen, Rollen oder Status schnell austauschen."
+            title="Teamler und Verantwortungen"
+            note="Die Teamkarten werden aus einer zentralen Datenliste geladen. Damit kannst du spaeter Namen, Rollen, Status oder interne Hinweise schnell austauschen."
           />
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -213,7 +214,7 @@ function App() {
         </section>
 
         <section className="section-shell">
-          <SectionHeading eyebrow="Eigene Ideen fuer die Seite" title="Elemente, die besonders gut zu GTA RP passen" />
+          <SectionHeading eyebrow="Interne Leitungsbereiche" title="Elemente, die zur Teambewertung passen" />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {spotlightIdeas.map((idea) => (
               <article key={idea.title} className="rounded-[24px] border border-white/10 bg-deep-900/80 p-6 shadow-panel">
@@ -226,20 +227,20 @@ function App() {
 
         <section className="section-shell" id="join">
           <SectionHeading
-            eyebrow="Teamverstaerkung"
-            title="Neue Leute ins Team holen"
-            note="Wenn du willst, koennen wir spaeter noch Discord, ein Bewerbungsformular oder einen internen Login-Bereich dazubauen."
+            eyebrow="Interne Bewertungen"
+            title="Positive und negative Infos zu Teamlern festhalten"
+            note="Dieser Bereich ist fuer die Teamleitung gedacht, damit Lob, Kritik und Leitungsentscheidungen an einem Ort gesammelt werden koennen."
           />
           <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <article className="rounded-[24px] border border-white/10 bg-gradient-to-br from-neon-orange/20 via-white/5 to-neon-mint/10 p-6 shadow-panel">
-              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">Was gute Bewerber mitbringen sollten</h3>
+              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">Was ihr pro Teamler dokumentieren koennt</h3>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-neon-steel md:text-base">
-                Gesucht sind Leute, die ruhig auftreten, Verantwortung uebernehmen und auch in stressigen Situationen
-                nicht unkontrolliert reagieren. Gerade fuer einen GTA-RP-Server ist ein staffstarkes Team oft der
-                Unterschied zwischen Chaos und Qualitaet.
+                Gerade in der Teamleitung hilft es, positive und negative Punkte nicht nur aus dem Kopf zu bewerten.
+                Wenn ihr eure Eindruecke sauber festhaltet, werden Gespraeche, Verwarnungen oder Befoerderungen deutlich
+                nachvollziehbarer und fairer.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {recruitmentPoints.map((point) => (
+                {reviewAreas.map((point) => (
                   <span key={point} className="chip border-neon-orange/20 bg-neon-orange/10 text-neon-ice">
                     {point}
                   </span>
@@ -248,20 +249,16 @@ function App() {
             </article>
 
             <article className="rounded-[24px] border border-white/10 bg-deep-900/80 p-6 shadow-panel">
-              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">Empfohlene naechste Ausbaustufen</h3>
+              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">Beispiel fuer Eintragsarten</h3>
               <ul className="mt-5 space-y-4 text-sm leading-7 text-neon-steel md:text-base">
-                <li className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-neon-mint" />
-                  <span>Discord-Button mit direkter Bewerberweiterleitung</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-neon-mint" />
-                  <span>Mitgliederbilder oder Rangabzeichen pro Teammitglied</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-neon-mint" />
-                  <span>Interner Bereich fuer Aufgaben, Notizen oder Eventplanung</span>
-                </li>
+                {noteTemplates.map((template) => (
+                  <li key={template.title} className="flex items-start gap-3">
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-neon-mint" />
+                    <span>
+                      <strong className="text-white">{template.title}:</strong> {template.text}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </article>
           </div>

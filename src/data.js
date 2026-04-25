@@ -4,7 +4,7 @@ export const teamMembers = [
     role: "Teamleitung",
     status: "Leitet aktuell",
     description:
-      "Fuehrt das Staff-Team, setzt Prioritaeten und behaelt Beschwerden, Events und Eskalationen im Blick.",
+      "Fuehrt das Staff-Team, setzt Prioritaeten und behaelt Beschwerden, interne Bewertungen und Eskalationen im Blick.",
     strengths: ["Strategie", "Leitung", "Entscheidungen"],
   },
   {
@@ -58,16 +58,16 @@ export const stats = [
 export const reasons = [
   {
     title: "Interne Orientierung",
-    text: "Neue Teammitglieder sehen direkt, wer fuer Support, Whitelist, Events oder Fraktionsfragen verantwortlich ist.",
+    text: "Die Teamleitung sieht direkt, wer fuer welche Bereiche verantwortlich ist und bei welchem Teamler genauer hingeschaut werden muss.",
     accent: true,
   },
   {
-    title: "Professioneller Auftritt",
-    text: "Eine starke Teamseite zeigt Spielern und Bewerbern, dass der Server nicht chaotisch, sondern sauber organisiert gefuehrt wird.",
+    title: "Saubere Dokumentation",
+    text: "Positive Leistungen, Auffaelligkeiten und interne Hinweise koennen zentral gesammelt werden, statt irgendwo im Chat verloren zu gehen.",
   },
   {
     title: "Leicht pflegbar",
-    text: "Texte, Mitglieder und Rollen koennen spaeter schnell angepasst werden, ohne die ganze Seite neu zu bauen.",
+    text: "Texte, Teamler und Bewertungsbereiche koennen spaeter schnell angepasst werden, ohne die ganze Seite neu zu bauen.",
   },
 ];
 
@@ -97,8 +97,8 @@ export const divisions = [
 export const standards = [
   "ruhige Kommunikation auch in stressigen Support-Situationen",
   "gleiche Regeln fuer alle, unabhaengig von Namen oder Fraktion",
-  "saubere Dokumentation von schweren Faellen und Teamentscheidungen",
-  "klare Rueckmeldungen an Spieler und Bewerber ohne Hinhaltetaktik",
+  "saubere Dokumentation von positiven und negativen Auffaelligkeiten",
+  "klare interne Rueckmeldungen an Teamler ohne unnoetiges Drama",
 ];
 
 export const weeklyRhythm = [
@@ -118,27 +118,28 @@ export const weeklyRhythm = [
 
 export const spotlightIdeas = [
   {
-    title: "Fraktionsstatus",
-    text: "Ein kompakter Bereich, der zeigt, welche Fraktionen stabil laufen und wo die Leitung gerade unterstuetzt.",
+    title: "Leistungsstand",
+    text: "Ein kompakter Bereich, der zeigt, welche Teamler konstant stark arbeiten und wer aktuell Unterstuetzung braucht.",
   },
   {
-    title: "Event-Vorschau",
-    text: "Mit einer Wochenvorschau fuer Events wirkt die Seite aktiver und mehr nach echter Serverleitung.",
+    title: "Auffaelligkeiten",
+    text: "Sammelt intern, ob es zu spaetes Reagieren, unruhige Kommunikation oder wiederkehrende Beschwerden gab.",
   },
   {
-    title: "Staff des Monats",
-    text: "Hebt gute Arbeit hervor und motiviert das Team, weil Einsatz sichtbar wertgeschaetzt wird.",
+    title: "Positives Feedback",
+    text: "Hebt gute Arbeit hervor, damit starke Leistungen in der Teamleitung nicht untergehen.",
   },
   {
-    title: "Interne Ziele",
-    text: "Zum Beispiel kuerzere Ticketzeiten, bessere Whitelist-Qualitaet oder mehr Community-Events.",
+    title: "Entwicklungsziele",
+    text: "Zum Beispiel bessere Ticketzeiten, sauberere Doku oder ruhigere Kommunikation in Stresssituationen.",
   },
 ];
 
-export const recruitmentPoints = [
-  "ruhige Supporter",
-  "verlaessliche Moderatoren",
-  "eventstarke Organisatoren",
+export const reviewAreas = [
+  "positives Verhalten",
+  "negative Auffaelligkeiten",
+  "Verwarnungen oder Hinweise",
+  "Entwicklung seit der letzten Leitungssicht",
 ];
 
 export const operationCards = [
@@ -152,12 +153,27 @@ export const operationCards = [
     ],
   },
   {
-    title: "Serverlage",
+    title: "Interne Bewertung",
     items: [
-      "Whitelist-Qualitaet im Blick",
-      "regelmaessige Event-Impulse",
-      "nachvollziehbare Staff-Kommunikation",
-      "aktive Kontrolle von Problemzonen",
+      "positive und negative Vermerke festhalten",
+      "nachvollziehbare Teamler-Entwicklung",
+      "auffaellige Muster frueh erkennen",
+      "klare Grundlage fuer Leitungsentscheidungen",
     ],
+  },
+];
+
+export const noteTemplates = [
+  {
+    title: "Positiver Eintrag",
+    text: "Zum Beispiel: hat mehrere Tickets ruhig und sauber geloest, war verlaesslich online und hat Teamkollegen unterstuetzt.",
+  },
+  {
+    title: "Negativer Eintrag",
+    text: "Zum Beispiel: wiederholt zu spaet reagiert, unpassender Ton im Support oder Entscheidungen schlecht dokumentiert.",
+  },
+  {
+    title: "Leitungsnotiz",
+    text: "Zum Beispiel: im Blick behalten, zunaechst muendliches Gespraech fuehren oder in zwei Wochen erneut bewerten.",
   },
 ];

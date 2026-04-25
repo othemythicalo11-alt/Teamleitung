@@ -5,17 +5,17 @@ export default {
     extend: {
       colors: {
         deep: {
-          950: "#07111c",
-          900: "#0b1727",
-          800: "#11243a",
-          700: "#16314d",
+          950: "#120816",
+          900: "#1a0d24",
+          800: "#27153a",
+          700: "#342055",
         },
         neon: {
-          orange: "#ff7a18",
-          sand: "#ffb975",
-          mint: "#67f0c0",
-          ice: "#eef7ff",
-          steel: "#9eb2c8",
+          orange: "#8f5cff",
+          sand: "#c89bff",
+          mint: "#a78bfa",
+          ice: "#f5efff",
+          steel: "#c4b5d6",
         },
       },
       fontFamily: {
