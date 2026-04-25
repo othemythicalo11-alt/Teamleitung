@@ -1,18 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  actionBoard,
-  divisions,
-  filterOptions,
-  operationCards,
-  reasons,
-  reviewAreas,
-  noteTemplates,
-  spotlightIdeas,
-  standards,
-  stats,
-  teamMembers,
-  weeklyRhythm,
-} from "./data";
+import { actionBoard, filterOptions, operationCards, reasons, reviewAreas, noteTemplates, spotlightIdeas, stats, teamMembers } from "./data";
 
 const emptyMemberForm = {
   name: "",
@@ -26,7 +13,7 @@ const emptyMemberForm = {
   nextStep: "",
 };
 
-const STORAGE_KEY = "deepstate-team-members";
+const STORAGE_KEY = "deepstate-team-members-v2";
 const roleGroups = [
   {
     label: "Leitung",
@@ -100,7 +87,7 @@ function App() {
     }
   });
   const [activeFilter, setActiveFilter] = useState("alle");
-  const [selectedMember, setSelectedMember] = useState(teamMembers[0]?.name ?? "");
+  const [selectedMember, setSelectedMember] = useState("");
   const [memberForm, setMemberForm] = useState(emptyMemberForm);
 
   const filteredMembers = useMemo(() => {
@@ -160,7 +147,7 @@ function App() {
 
   function handleResetMembers() {
     setMembers(teamMembers);
-    setSelectedMember(teamMembers[0]?.name ?? "");
+    setSelectedMember("");
     setActiveFilter("alle");
     window.localStorage.removeItem(STORAGE_KEY);
   }
@@ -200,8 +187,6 @@ function App() {
             <nav className="mt-8 grid gap-2">
               {[
                 ["#team", "Team Layer"],
-                ["#bereiche", "Struktur"],
-                ["#standards", "Standards"],
                 ["#join", "Bewertungen"],
                 ["#massnahmen", "Massnahmen"],
               ].map(([href, label]) => (
@@ -497,74 +482,86 @@ function App() {
             </div>
           </form>
 
-          <div className="mb-6 flex flex-wrap gap-2">
-            {filterOptions.map((option) => {
-              const active = activeFilter === option;
+          {members.length > 0 ? (
+            <div className="mb-6 flex flex-wrap gap-2">
+              {filterOptions.map((option) => {
+                const active = activeFilter === option;
 
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setActiveFilter(option)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                    active
-                      ? "border-neon-orange/40 bg-neon-orange/15 text-white"
-                      : "border-white/10 bg-white/5 text-neon-steel hover:border-white/20 hover:text-white"
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setActiveFilter(option)}
+                    className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                      active
+                        ? "border-neon-orange/40 bg-neon-orange/15 text-white"
+                        : "border-white/10 bg-white/5 text-neon-steel hover:border-white/20 hover:text-white"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+
+          {members.length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+              {filteredMembers.map((member) => (
+                <article
+                  key={member.name}
+                  className={`relative overflow-hidden rounded-[24px] border p-6 shadow-panel transition ${
+                    selectedMember === member.name
+                      ? "border-fuchsia-400/40 bg-gradient-to-br from-deep-800/95 to-fuchsia-500/10"
+                      : "border-white/10 bg-deep-900/80"
                   }`}
                 >
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
-            {filteredMembers.map((member) => (
-              <article
-                key={member.name}
-                className={`relative overflow-hidden rounded-[24px] border p-6 shadow-panel transition ${
-                  selectedMember === member.name
-                    ? "border-fuchsia-400/40 bg-gradient-to-br from-deep-800/95 to-fuchsia-500/10"
-                    : "border-white/10 bg-deep-900/80"
-                }`}
-              >
-                <div className="pointer-events-none absolute -bottom-12 -right-10 h-36 w-36 rounded-full bg-fuchsia-500/20 blur-2xl" />
-                <div className="relative flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{member.name}</h3>
-                    <span
-                      className={`mt-2 inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] ${getRoleStyle(
-                        member.role
-                      )}`}
-                    >
-                      {member.role}
+                  <div className="pointer-events-none absolute -bottom-12 -right-10 h-36 w-36 rounded-full bg-fuchsia-500/20 blur-2xl" />
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-2xl font-bold text-white">{member.name}</h3>
+                      <span
+                        className={`mt-2 inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] ${getRoleStyle(
+                          member.role
+                        )}`}
+                      >
+                        {member.role}
+                      </span>
+                    </div>
+                    <span className={`rounded-full border px-3 py-2 text-xs font-semibold ${getStatusStyle(member.status)}`}>
+                      {member.status}
                     </span>
                   </div>
-                  <span className={`rounded-full border px-3 py-2 text-xs font-semibold ${getStatusStyle(member.status)}`}>
-                    {member.status}
-                  </span>
-                </div>
 
-                <p className="relative mt-5 text-sm leading-7 text-neon-steel md:text-base">{member.description}</p>
+                  <p className="relative mt-5 text-sm leading-7 text-neon-steel md:text-base">{member.description}</p>
 
-                <div className="relative mt-5 flex flex-wrap gap-2">
-                  {member.strengths.map((strength) => (
-                    <span key={strength} className="chip">
-                      {strength}
-                    </span>
-                  ))}
-                </div>
+                  <div className="relative mt-5 flex flex-wrap gap-2">
+                    {member.strengths.map((strength) => (
+                      <span key={strength} className="chip">
+                        {strength}
+                      </span>
+                    ))}
+                  </div>
 
-                <button
-                  type="button"
-                  onClick={() => setSelectedMember(member.name)}
-                  className="relative mt-5 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-neon-orange/40 hover:bg-neon-orange/10"
-                >
-                  Details ansehen
-                </button>
-              </article>
-            ))}
-          </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedMember(member.name)}
+                    className="relative mt-5 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-neon-orange/40 hover:bg-neon-orange/10"
+                  >
+                    Details ansehen
+                  </button>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-[28px] border border-dashed border-white/15 bg-white/[0.03] p-10 text-center shadow-panel">
+              <p className="eyebrow">Noch leer</p>
+              <h3 className="font-display text-3xl uppercase tracking-[0.05em] text-white">Noch keine Teamler eingetragen</h3>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-neon-steel md:text-base">
+                Die Beispiel-Teamler wurden entfernt. Du kannst jetzt direkt oben im Formular deine echten Teamler manuell anlegen.
+              </p>
+            </div>
+          )}
 
           {currentMember ? (
             <div className="mt-6 grid gap-4 xl:grid-cols-[0.8fr_1.2fr]">
@@ -627,52 +624,6 @@ function App() {
           ) : null}
           </section>
 
-          <section className="section-shell" id="bereiche">
-          <SectionHeading eyebrow="Server-Organisation" title="Vier Bereiche, die ich dir empfehle" />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {divisions.map((division) => (
-              <article key={division.index} className="rounded-[24px] border border-white/10 bg-deep-900/80 p-6 shadow-panel">
-                <span className="font-display text-3xl uppercase tracking-[0.08em] text-neon-sand">{division.index}</span>
-                <h3 className="mt-4 font-display text-2xl uppercase tracking-[0.05em] text-white">{division.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-neon-steel md:text-base">{division.text}</p>
-              </article>
-            ))}
-          </div>
-          </section>
-
-          <section className="section-shell" id="standards">
-          <SectionHeading eyebrow="Teamkodex" title="Standards, die Vertrauen schaffen" />
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <article className="rounded-[24px] border border-white/10 bg-deep-900/80 p-6 shadow-panel">
-              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">
-                Was bei einem starken Staff gut ankommt
-              </h3>
-              <ul className="mt-5 space-y-4 text-sm leading-7 text-neon-steel md:text-base">
-                {standards.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-neon-orange" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-[24px] border border-white/10 bg-deep-900/80 p-6 shadow-panel">
-              <h3 className="font-display text-2xl uppercase tracking-[0.05em] text-white">Empfohlener Weekly-Rhythmus</h3>
-              <div className="mt-5 space-y-5">
-                {weeklyRhythm.map((entry, index) => (
-                  <div
-                    key={entry.day}
-                    className={`${index > 0 ? "border-t border-white/10 pt-5" : ""}`}
-                  >
-                    <p className="font-display text-2xl uppercase tracking-[0.06em] text-neon-sand">{entry.day}</p>
-                    <p className="mt-2 text-sm leading-7 text-neon-steel md:text-base">{entry.text}</p>
-                  </div>
-                ))}
-              </div>
-            </article>
-          </div>
-          </section>
 
           <section className="section-shell">
           <SectionHeading eyebrow="Interne Leitungsbereiche" title="Elemente, die zur Teambewertung passen" />
